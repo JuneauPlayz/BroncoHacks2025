@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3 uid="uid://dkmxl4he5vvfm"]
+
+[ext_resource type="Script" uid="uid://b7yr21x8l6436" path="res://character_body_2d.gd" id="1_0f027"]
+[ext_resource type="Script" uid="uid://7dr2ew6w0fj" path="res://main_scene.gd" id="1_2c62f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3jxj"]
+radius = 21.0
+height = 98.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0f027"]
+size = Vector2(1105.5, 68)
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_2c62f")
+
+[node name="Speed" type="Label" parent="."]
+offset_right = 79.0
+offset_bottom = 42.0
+text = "Speed: "
+
+[node name="Character" type="CharacterBody2D" parent="."]
+script = ExtResource("1_0f027")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
+position = Vector2(79, 464)
+shape = SubResource("CapsuleShape2D_o3jxj")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(544.25, 548)
+scale = Vector2(0.177652, -0.615938)
+shape = SubResource("RectangleShape2D_0f027")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/CollisionShape2D"]
+offset_left = -580.0
+offset_top = -32.0
+offset_right = 580.0
+offset_bottom = 34.0
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StaticBody2D"]
+position = Vector2(-398, 13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/StaticBody2D"]
+position = Vector2(544.25, 548)
+scale = Vector2(0.177652, -0.615938)
+shape = SubResource("RectangleShape2D_0f027")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/StaticBody2D/CollisionShape2D"]
+offset_left = -580.0
+offset_top = -32.0
+offset_right = 580.0
+offset_bottom = 34.0
+metadata/_edit_use_anchors_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="StaticBody2D/StaticBody2D"]
+position = Vector2(729, 11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/StaticBody2D/StaticBody2D"]
+position = Vector2(544.25, 548)
+scale = Vector2(0.177652, -0.615938)
+shape = SubResource("RectangleShape2D_0f027")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D/StaticBody2D/StaticBody2D/CollisionShape2D"]
+offset_left = -580.0
+offset_top = -32.0
+offset_right = 580.0
+offset_bottom = 34.0
+metadata/_edit_use_anchors_ = true
