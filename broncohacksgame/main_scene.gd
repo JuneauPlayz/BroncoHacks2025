@@ -2,9 +2,10 @@ extends Node2D
 @onready var character: CharacterBody2D = $Character
 
 var rng
-var speed
+var speed : float
 var count = 0
 @onready var speed_label: Label = $Speed
+@onready var wall: Node2D = $Wall
 
 
 # Called when the node enters the scene tree for the first time.
@@ -21,5 +22,11 @@ func _process(delta: float) -> void:
 		speed = round(speed * 100) / 100.0
 		speed_label.text = "Speed: " + str(speed)
 		if speed > 2.0:
-			character.jump(speed)
+			#character.jump(speed)
+			pass
 			
+
+
+func _on_wall_detection_body_entered(body: Node2D) -> void:
+	if body.dash_check == true:
+		wall.queue_free()
