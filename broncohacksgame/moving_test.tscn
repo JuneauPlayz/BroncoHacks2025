@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfiwt5qybnxpr"]
+
+[ext_resource type="PackedScene" uid="uid://cq7j4tnoam0w7" path="res://reusables/platform.tscn" id="1_kmhcy"]
+[ext_resource type="PackedScene" uid="uid://dexidgfh0kg4h" path="res://character.tscn" id="2_g0tgl"]
+[ext_resource type="Script" uid="uid://c78i37r32yimu" path="res://burger_spawner.gd" id="4_p2qg5"]
+
+[node name="Moving_Test" type="Node2D"]
+
+[node name="Platform" parent="." instance=ExtResource("1_kmhcy")]
+position = Vector2(560, 518)
+scale = Vector2(9.8263, 1.125)
+
+[node name="Character" parent="." instance=ExtResource("2_g0tgl")]
+position = Vector2(35, 462)
+
+[node name="BurgerSpawner" type="Node2D" parent="."]
+position = Vector2(1147, 337)
+script = ExtResource("4_p2qg5")
+
+[node name="Timer" type="Timer" parent="BurgerSpawner"]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="BurgerSpawner/Timer" to="BurgerSpawner" method="_on_timer_timeout"]

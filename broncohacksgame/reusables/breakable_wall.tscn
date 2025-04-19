@@ -16,7 +16,10 @@ func _process(delta: float) -> void:
 
 func _on_wall_detection_body_entered(body: Node2D) -> void:
 	if body.dash_check == true or body.smash_check == true:
+		body.dash_check = false
+		body.smash_check = false
 		queue_free()
+		
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmby6"]

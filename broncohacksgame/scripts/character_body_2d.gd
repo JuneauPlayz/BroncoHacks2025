@@ -54,6 +54,7 @@ func smash():
 	print("smashed")
 	velocity.y = -JUMP_VELOCITY * 2
 	smash_check = true
+	jump_check = false
 	smash_timer.start()
 	
 func _on_dash_timer_timeout() -> void:

@@ -1,12 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://dkmxl4he5vvfm"]
 
 [ext_resource type="Script" uid="uid://vpg38tk67y3g" path="res://scripts/main_scene.gd" id="1_hlkwl"]
-[ext_resource type="Script" uid="uid://booorqgvmcqhj" path="res://scripts/character_body_2d.gd" id="2_lcne3"]
+[ext_resource type="PackedScene" uid="uid://dexidgfh0kg4h" path="res://character.tscn" id="2_lcne3"]
 [ext_resource type="PackedScene" uid="uid://dssiqlwrlrgmr" path="res://reusables/breakable_wall.tscn" id="3_lcne3"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o3jxj"]
-radius = 21.0
-height = 98.0
+[ext_resource type="PackedScene" uid="uid://cq7j4tnoam0w7" path="res://reusables/platform.tscn" id="3_p2tkh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0f027"]
 size = Vector2(1105.5, 68)
@@ -19,41 +16,11 @@ offset_right = 79.0
 offset_bottom = 42.0
 text = "Speed: "
 
-[node name="Character" type="CharacterBody2D" parent="."]
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("2_lcne3")
+[node name="Character" parent="." instance=ExtResource("2_lcne3")]
+position = Vector2(39, 223)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Character"]
-position = Vector2(69, 168)
-shape = SubResource("CapsuleShape2D_o3jxj")
-
-[node name="DashTimer" type="Timer" parent="Character"]
-wait_time = 0.2
-one_shot = true
-
-[node name="JumpTimer" type="Timer" parent="Character"]
-one_shot = true
-
-[node name="SmashTimer" type="Timer" parent="Character"]
-wait_time = 0.5
-one_shot = true
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(331, 24)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(534.25, 252)
-scale = Vector2(0.177652, -0.615938)
-shape = SubResource("RectangleShape2D_0f027")
-
-[node name="ColorRect" type="ColorRect" parent="StaticBody2D3/CollisionShape2D"]
-offset_left = -553.048
-offset_top = -40.5885
-offset_right = 606.952
-offset_bottom = 25.4115
-scale = Vector2(0.985074, 1.11185)
-metadata/_edit_use_anchors_ = true
+[node name="Platform" parent="." instance=ExtResource("3_p2tkh")]
+position = Vector2(762, 253)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2(-398, 13)
@@ -104,7 +71,3 @@ rotation = 1.56777
 [node name="Wall6" parent="." instance=ExtResource("3_lcne3")]
 position = Vector2(977, 453)
 rotation = 1.56777
-
-[connection signal="timeout" from="Character/DashTimer" to="Character" method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="Character/JumpTimer" to="Character" method="_on_jump_timer_timeout"]
-[connection signal="timeout" from="Character/SmashTimer" to="Character" method="_on_smash_timer_timeout"]
