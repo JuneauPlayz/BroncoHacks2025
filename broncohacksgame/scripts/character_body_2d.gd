@@ -60,6 +60,8 @@ func _physics_process(delta: float) -> void:
 		direction = 1.0
 	elif game.h_state == "backward":
 		direction = -1.0
+	elif game.h_state == "neutral":
+		direction = 0.0
 	if not dash_check:
 		if direction:
 			if not jump_check:
@@ -104,6 +106,7 @@ func dash(direction):
 	hitbox_reset()
 	print("dashed")
 	sprite.play("dash")
+	direction = 1.0
 	velocity.x = direction * SPEED * 2
 	dash_check = true
 	jump(0.5)
