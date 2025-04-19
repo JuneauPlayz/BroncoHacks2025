@@ -1,6 +1,10 @@
 extends Node2D
 
+var score = 0
+
 var current_scene
+
+@onready var score_label: Label = $Score
 
 const MAIN_SCENE = preload("res://main scenes/main_scene.tscn")
 const PICKUP_TEST = preload("res://pickup test.tscn")
@@ -15,3 +19,8 @@ func new_scene(scene):
 		current_scene.queue_free()
 	current_scene = scene.instantiate()
 	self.add_child(current_scene)
+
+func add_score(amt):
+	score += amt
+	score_label.text = "Score: " + str(score)
+	

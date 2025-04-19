@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var game
 
 var SPEED = 300.0
 var JUMP_VELOCITY = -520.0
@@ -23,6 +24,7 @@ var current_powerup_timer
 var has_powerup
 
 func _ready():
+	game = get_tree().get_first_node_in_group("game")
 	powerup_timer = get_tree().get_first_node_in_group("powerup_timer")
 	
 func _process(delta: float) -> void:
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 		powerup_timer.text = "Powerup Timer: " + str(roundi(current_powerup_timer.time_left + 0.5))
 	
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
+	# Add the gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
@@ -58,7 +60,8 @@ func _physics_process(delta: float) -> void:
 		smash()
 
 	velocity += external_wind * delta
-
+	if velocity != Vector2.ZERO:
+		game.add_score(1)
 	
 	move_and_slide()
 

@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://vauvmsu8yxvv"]
+[gd_scene load_steps=3 format=3 uid="uid://vauvmsu8yxvv"]
 
 [ext_resource type="Script" uid="uid://bqqdd5la4y6n2" path="res://game.gd" id="1_80nbo"]
 
-[node name="Game" type="Node2D"]
+[sub_resource type="LabelSettings" id="LabelSettings_80nbo"]
+font_size = 36
+
+[node name="Game" type="Node2D" groups=["game"]]
 script = ExtResource("1_80nbo")
+
+[node name="Score" type="Label" parent="."]
+offset_left = 23.0
+offset_top = 8.0
+offset_right = 159.0
+offset_bottom = 58.0
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_80nbo")
