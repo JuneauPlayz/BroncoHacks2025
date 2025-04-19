@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvcaj6a6y7q8c"]
+
+[ext_resource type="PackedScene" uid="uid://cq7j4tnoam0w7" path="res://reusables/platform.tscn" id="1_ryfj2"]
+[ext_resource type="PackedScene" uid="uid://dexidgfh0kg4h" path="res://character.tscn" id="2_ml2ib"]
+[ext_resource type="PackedScene" uid="uid://8c7u01nqrcno" path="res://pickup.tscn" id="3_ml2ib"]
+
+[node name="PickupTest" type="Node2D"]
+scale = Vector2(1.0107, 1.01827)
+
+[node name="Platform" parent="." instance=ExtResource("1_ryfj2")]
+position = Vector2(95, 562)
+scale = Vector2(15.2, 1)
+
+[node name="Character" parent="." instance=ExtResource("2_ml2ib")]
+position = Vector2(88, 523)
+scale = Vector2(1.017, 1.00955)
+
+[node name="Pickup" parent="." instance=ExtResource("3_ml2ib")]
+position = Vector2(442.266, 475.318)
+type = "jump_boost"
+length = 10
+
+[node name="Powerup Timer" type="Label" parent="." groups=["powerup_timer"]]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Powerup Timer: "

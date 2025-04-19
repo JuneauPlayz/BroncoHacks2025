@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://8c7u01nqrcno"]
+
+[ext_resource type="Texture2D" uid="uid://bhnjuc5ppiusd" path="res://sprites/burger.png" id="1_iqk3k"]
+[ext_resource type="Script" uid="uid://c1fwas2k03obr" path="res://pickup.gd" id="1_weqpt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_weqpt"]
+radius = 53.0
+
+[node name="Pickup" type="Node2D"]
+script = ExtResource("1_weqpt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -16)
+scale = Vector2(0.0854701, 0.0747863)
+texture = ExtResource("1_iqk3k")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(4, -13)
+shape = SubResource("CircleShape2D_weqpt")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
