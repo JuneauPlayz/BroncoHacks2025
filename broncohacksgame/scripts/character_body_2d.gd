@@ -64,10 +64,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("dash") and is_on_floor():
 		dash(direction)
-	if Input.is_action_just_pressed("smash") and jump_check:
+	if Input.is_action_just_pressed("smash") anwd jump_check:
 		smash()
 
-	##velocity += external_wind * delta
+	velocity += external_wind * delta
 	##if velocity != Vector2.ZERO:
 		##game.add_score(1)
 	##else:
@@ -142,7 +142,7 @@ func _on_jump_boost_timer_timeout() -> void:
 	powerup_timer.visible = false
 	
 func die():
-	visible = false
+	game.new_scene(game.current_level)
 	
 func hitbox_reset():
 	hitbox.monitorable = false

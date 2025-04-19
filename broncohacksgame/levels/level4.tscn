@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://btwes7hee0c4o"]
+[gd_scene load_steps=18 format=3 uid="uid://btwes7hee0c4o"]
 
 [ext_resource type="Texture2D" uid="uid://vxjt7hpb5o88" path="res://levels/tilemap/grass tileset ver.2.png" id="1_8s3b3"]
 [ext_resource type="Texture2D" uid="uid://wngt77nkhxo7" path="res://levels/tilemap/MonedaD.png" id="2_cc5tm"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dexidgfh0kg4h" path="res://character.tscn" id="7_cc5tm"]
 [ext_resource type="PackedScene" uid="uid://bfmcuf3e2bks0" path="res://coin.tscn" id="8_mj76i"]
 [ext_resource type="PackedScene" uid="uid://ctm6idwgbc3j1" path="res://key.tscn" id="9_mdw0g"]
+[ext_resource type="PackedScene" uid="uid://dc7wi2yg8sq3b" path="res://finish.tscn" id="10_naavy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qi51e"]
 texture = ExtResource("1_8s3b3")
@@ -455,3 +456,6 @@ position = Vector2(152, -376)
 
 [node name="key" parent="." instance=ExtResource("9_mdw0g")]
 position = Vector2(40, -264)
+
+[node name="Finish" parent="." instance=ExtResource("10_naavy")]
+position = Vector2(38, -420)

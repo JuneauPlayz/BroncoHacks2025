@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cue526nut4g8t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_731nq"]
+font_size = 121
+
+[node name="WinScreen" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 302.0
+offset_top = 63.0
+offset_right = 837.0
+offset_bottom = 229.0
+text = "YOU WIN"
+label_settings = SubResource("LabelSettings_731nq")

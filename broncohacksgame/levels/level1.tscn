@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://h3w06s1h4l8v"]
+[gd_scene load_steps=18 format=3 uid="uid://h3w06s1h4l8v"]
 
 [ext_resource type="Texture2D" uid="uid://vxjt7hpb5o88" path="res://levels/tilemap/grass tileset ver.2.png" id="1_pdpul"]
 [ext_resource type="Texture2D" uid="uid://wngt77nkhxo7" path="res://levels/tilemap/MonedaD.png" id="2_8hd6v"]
@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://btqyw86lym2b7" path="res://levels/tilemap/grass tileset.png" id="6_yydhl"]
 [ext_resource type="PackedScene" uid="uid://dexidgfh0kg4h" path="res://character.tscn" id="7_8hd6v"]
 [ext_resource type="PackedScene" uid="uid://ctm6idwgbc3j1" path="res://key.tscn" id="8_045es"]
+[ext_resource type="PackedScene" uid="uid://dc7wi2yg8sq3b" path="res://finish.tscn" id="9_omn1t"]
+[ext_resource type="PackedScene" uid="uid://fy0y6fqns3q3" path="res://reusables/death_area.tscn" id="10_lf3p4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bekh1"]
 texture = ExtResource("1_pdpul")
@@ -409,3 +411,18 @@ zoom = Vector2(2, 2)
 
 [node name="key" parent="." instance=ExtResource("8_045es")]
 position = Vector2(120, -24)
+
+[node name="Finish" parent="." instance=ExtResource("9_omn1t")]
+position = Vector2(278, -34)
+
+[node name="DeathArea" parent="." instance=ExtResource("10_lf3p4")]
+position = Vector2(-263, 12)
+scale = Vector2(2.26131, 0.114007)
+
+[node name="DeathArea2" parent="." instance=ExtResource("10_lf3p4")]
+position = Vector2(320, 11)
+scale = Vector2(2.26131, 0.114007)
+
+[node name="DeathArea3" parent="." instance=ExtResource("10_lf3p4")]
+position = Vector2(457, 10)
+scale = Vector2(2.26131, 0.114007)

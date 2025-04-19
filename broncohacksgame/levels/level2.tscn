@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cfnn8g44cp126"]
+[gd_scene load_steps=19 format=3 uid="uid://cfnn8g44cp126"]
 
 [ext_resource type="Texture2D" uid="uid://vxjt7hpb5o88" path="res://levels/tilemap/grass tileset ver.2.png" id="1_s1bpp"]
 [ext_resource type="Texture2D" uid="uid://wngt77nkhxo7" path="res://levels/tilemap/MonedaD.png" id="2_76ugp"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dexidgfh0kg4h" path="res://character.tscn" id="7_76ugp"]
 [ext_resource type="PackedScene" uid="uid://bfmcuf3e2bks0" path="res://coin.tscn" id="8_e8p81"]
 [ext_resource type="PackedScene" uid="uid://ctm6idwgbc3j1" path="res://key.tscn" id="9_55gdq"]
+[ext_resource type="PackedScene" uid="uid://dc7wi2yg8sq3b" path="res://finish.tscn" id="10_crte6"]
+[ext_resource type="PackedScene" uid="uid://fy0y6fqns3q3" path="res://reusables/death_area.tscn" id="11_hq01p"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjysh"]
 texture = ExtResource("1_s1bpp")
@@ -416,3 +418,10 @@ position = Vector2(216, -56)
 
 [node name="key" parent="." instance=ExtResource("9_55gdq")]
 position = Vector2(152, -24)
+
+[node name="Finish" parent="." instance=ExtResource("10_crte6")]
+position = Vector2(342, -34)
+
+[node name="DeathArea3" parent="." instance=ExtResource("11_hq01p")]
+position = Vector2(-316, 10)
+scale = Vector2(8.89873, 0.113386)
