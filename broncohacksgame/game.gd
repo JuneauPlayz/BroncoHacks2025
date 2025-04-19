@@ -3,6 +3,8 @@ extends Node2D
 var score = 0
 
 var current_scene
+var h_state
+var v_state
 
 @onready var score_label: Label = $Score
 
@@ -20,7 +22,10 @@ func new_scene(scene):
 	current_scene = scene.instantiate()
 	self.add_child(current_scene)
 
+
 func add_score(amt):
 	score += amt
+	print(h_state)
+	print(v_state)
 	score_label.text = "Score: " + str(score)
 	
