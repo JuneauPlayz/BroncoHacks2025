@@ -22,6 +22,8 @@ project/assembly_name="BroncoHacksGame"
 [global_group]
 
 breakable=""
+character=""
+powerup_timer=""
 
 [input]
 

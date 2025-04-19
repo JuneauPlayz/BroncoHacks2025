@@ -6,7 +6,7 @@
 radius = 21.0
 height = 98.0
 
-[node name="Character" type="CharacterBody2D"]
+[node name="Character" type="CharacterBody2D" groups=["character"]]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_glpr6")
@@ -26,6 +26,11 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 
+[node name="JumpBoostTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="SmashTimer" to="." method="_on_smash_timer_timeout"]
+[connection signal="timeout" from="JumpBoostTimer" to="." method="_on_jump_boost_timer_timeout"]

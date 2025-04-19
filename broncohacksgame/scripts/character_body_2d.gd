@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+var SPEED = 300.0
+var JUMP_VELOCITY = -400.0
 
 var dash_check = false
 var jump_check = false
@@ -11,7 +11,19 @@ var smash_check = false
 @onready var dash_timer: Timer = $DashTimer
 @onready var jump_timer: Timer = $JumpTimer
 @onready var smash_timer: Timer = $SmashTimer
+@onready var jump_boost_timer: Timer = $JumpBoostTimer
 
+var powerup_timer
+var current_powerup_timer
+var has_powerup
+
+func _ready():
+	powerup_timer = get_tree().get_first_node_in_group("powerup_timer")
+	
+func _process(delta: float) -> void:
+	if has_powerup:
+		powerup_timer.text = "Powerup Timer: " + str(roundi(current_powerup_timer.time_left + 0.5))
+	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
@@ -57,6 +69,16 @@ func smash():
 	jump_check = false
 	smash_timer.start()
 	
+func jump_boost(length):
+	JUMP_VELOCITY *= 2
+	jump_boost_timer.wait_time = length
+	current_powerup_timer = jump_boost_timer
+	has_powerup = true
+	powerup_timer.visible = true
+	jump_boost_timer.start()
+
+
+
 func _on_dash_timer_timeout() -> void:
 	dash_check = false
 
@@ -67,3 +89,11 @@ func _on_jump_timer_timeout() -> void:
 
 func _on_smash_timer_timeout() -> void:
 	smash_check = false
+	
+	
+
+
+func _on_jump_boost_timer_timeout() -> void:
+	JUMP_VELOCITY /= 2
+	has_powerup = false
+	powerup_timer.visible = false
