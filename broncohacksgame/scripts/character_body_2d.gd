@@ -10,6 +10,7 @@ var external_wind = Vector2.ZERO
 @export var coyote_time_max := 0.2
 var coyote_time := 0.0
 
+@onready var hitbox: Area2D = $Hitbox
 
 var dash_check = false
 var jump_check = false
@@ -88,20 +89,26 @@ func jump(speed):
 			sprite.play("jump")
 
 func dash(direction):
+	hitbox_reset()
 	print("dashed")
 	sprite.play("dash")
 	velocity.x = direction * SPEED * 2
 	dash_check = true
 	jump(0.5)
 	dash_timer.start()
+	for wall in get_tree().get_nodes_in_group("walls"):
+		wall.check_for_dash_hit(self)
 		
 func smash():
+	hitbox_reset()
 	print("smashed")
 	velocity.y = -JUMP_VELOCITY * 2
 	smash_check = true
 	jump_check = false
 	sprite.play("smash")
 	smash_timer.start()
+	for floor in get_tree().get_nodes_in_group("floor"):
+		floor.check_for_smash_hit(self)
 	
 func jump_boost(length):
 	JUMP_VELOCITY *= 2
@@ -136,3 +143,7 @@ func _on_jump_boost_timer_timeout() -> void:
 	
 func die():
 	visible = false
+	
+func hitbox_reset():
+	hitbox.monitorable = false
+	hitbox.monitorable = true

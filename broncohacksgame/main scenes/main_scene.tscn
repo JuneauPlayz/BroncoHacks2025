@@ -16,7 +16,7 @@ offset_right = 79.0
 offset_bottom = 42.0
 text = "Speed: "
 
-[node name="Character" parent="." groups=["character"] instance=ExtResource("2_lcne3")]
+[node name="Character" parent="." instance=ExtResource("2_lcne3")]
 position = Vector2(39, 223)
 
 [node name="Platform" parent="." instance=ExtResource("3_p2tkh")]

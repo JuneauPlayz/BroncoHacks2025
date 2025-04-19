@@ -25,6 +25,8 @@ breakable=""
 character=""
 powerup_timer=""
 game=""
+floor=""
+walls=""
 
 [input]
 

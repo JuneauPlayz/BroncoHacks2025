@@ -1,14 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmtqj0ih6y5cq"]
+[gd_scene load_steps=5 format=3 uid="uid://cmtqj0ih6y5cq"]
 
+[ext_resource type="Script" uid="uid://kq68logc3k31" path="res://scripts/breakable_wall.gd" id="1_2eorf"]
 [ext_resource type="Texture2D" uid="uid://bkcju72c3cvbl" path="res://sprites/breakwall.png" id="1_amqgk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_amqgk"]
-size = Vector2(16, 48)
+size = Vector2(12, 44)
 
-[node name="breakwall" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eorf"]
+size = Vector2(14, 46)
+
+[node name="breakwall" type="Area2D" groups=["walls"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_2eorf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_amqgk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_amqgk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_2eorf")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_wall_detection_body_entered"]
