@@ -338,4 +338,3 @@ sources/38 = SubResource("TileSetAtlasSource_yes5d")
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_o0rnb")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 1, 0, -65534, 4, 0, 327676, 36, 0, -65539, 38, 0)
