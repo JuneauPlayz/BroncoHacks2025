@@ -16,6 +16,7 @@ var dash_check = false
 var jump_check = false
 var smash_check = false
 
+var can_dash = true
 var direction 
 
 var previous_h_state = null
@@ -26,6 +27,7 @@ var previous_v_state = null
 @onready var smash_timer: Timer = $SmashTimer
 @onready var jump_boost_timer: Timer = $JumpBoostTimer
 
+
 var powerup_timer
 var current_powerup_timer
 var has_powerup
@@ -33,6 +35,7 @@ var has_powerup
 func _ready():
 	game = get_tree().get_first_node_in_group("game")
 	powerup_timer = get_tree().get_first_node_in_group("powerup_timer")
+	floor_max_angle = deg_to_rad(60)
 	
 func _process(delta: float) -> void:
 	if has_powerup:
@@ -56,9 +59,9 @@ func _physics_process(delta: float) -> void:
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	if game.h_state == "forward":
+	if game.h_state == "forward" or Input.is_action_just_pressed("right"):
 		direction = 1.0
-	elif game.h_state == "backward":
+	elif game.h_state == "backward" or Input.is_action_just_pressed("left"):
 		direction = -1.0
 	if not dash_check:
 		if direction:
@@ -72,7 +75,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if game.h_state == "dash" and is_on_floor():
+	if game.h_state == "dash" and is_on_floor() and can_dash:
 		dash(direction)
 	if previous_v_state == "jump" and game.v_state == "crouch" and jump_check:
 		smash()
@@ -110,6 +113,7 @@ func dash(direction):
 	dash_timer.start()
 	for wall in get_tree().get_nodes_in_group("walls"):
 		wall.check_for_dash_hit(self)
+	can_dash = false
 		
 func smash():
 	hitbox_reset()
@@ -159,3 +163,7 @@ func die():
 func hitbox_reset():
 	hitbox.monitorable = false
 	hitbox.monitorable = true
+
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true

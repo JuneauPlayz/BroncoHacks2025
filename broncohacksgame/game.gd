@@ -8,7 +8,11 @@ var h_state
 var v_state
 
 var hasKey = false
-@onready var score_label: Label = $Score
+
+@onready var h_state_label: Label = $CanvasLayer/H_STATE_LABEL
+@onready var v_state_label: Label = $CanvasLayer/V_STATE_LABEL
+
+@onready var score_label: Label = $CanvasLayer/Score
 
 const MAIN_SCENE = preload("res://main scenes/main_scene.tscn")
 const PICKUP_TEST = preload("res://pickup test.tscn")
@@ -23,6 +27,10 @@ const WIN_SCREEN = preload("res://win_screen.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	new_scene(LEVEL_1)
+
+func _process(delta : float) -> void:
+	h_state_label.text = h_state
+	v_state_label.text = v_state
 
 func new_scene(scene):
 	if current_scene != null:
