@@ -122,7 +122,6 @@ func dash(direction):
 	print("dashed")
 	sprite.play("dash")
 	game.add_dash(1)
-	direction = 1.0
 	velocity.x = direction * SPEED * 2
 	dash_check = true
 	jump(0.5)
