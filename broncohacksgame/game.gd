@@ -33,6 +33,8 @@ func new_scene(scene):
 
 
 func add_score(amt):
+	print(h_state)
+	print(v_state)
 	score += amt
 	score_label.text = "Score: " + str(score)
 	

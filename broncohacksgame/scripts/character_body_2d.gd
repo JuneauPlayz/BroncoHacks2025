@@ -37,9 +37,11 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		game.add_score(1)
 	
 	if is_on_floor():
 		coyote_time = coyote_time_max
+		game.add_score(1)
 	else:
 		coyote_time -= delta
 		
@@ -64,7 +66,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("dash") and is_on_floor():
 		dash(direction)
-	if Input.is_action_just_pressed("smash") anwd jump_check:
+	if Input.is_action_just_pressed("smash") and jump_check:
 		smash()
 
 	velocity += external_wind * delta

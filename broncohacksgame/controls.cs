@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.IO.Ports;
 
-public partial class Teensy1 : Node2D
+public partial class controls : Node2D
 {
 	SerialPort serialPort;
 	Node2D game;
