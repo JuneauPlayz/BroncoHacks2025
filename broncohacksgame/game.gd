@@ -38,8 +38,10 @@ func _process(delta : float) -> void:
 		h_state_label.text = h_state
 	if v_state != null:
 		v_state_label.text = v_state
+
 	if dash_state != null:
 		dash_state_label.text = dash_state
+
 
 func new_scene(scene):
 	if current_scene != null:
