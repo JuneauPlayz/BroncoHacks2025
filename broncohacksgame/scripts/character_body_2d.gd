@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var game
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 var SPEED = 300.0
 var JUMP_VELOCITY = -520.0
@@ -50,7 +51,13 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left", "right")
 	if not dash_check:
 		if direction:
+			if not jump_check:
+				sprite.play("run")
 			velocity.x = direction * SPEED
+			if velocity.x < 0:
+				sprite.flip_h = true
+			else:
+				sprite.flip_h = false
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
@@ -62,6 +69,11 @@ func _physics_process(delta: float) -> void:
 	velocity += external_wind * delta
 	if velocity != Vector2.ZERO:
 		game.add_score(1)
+	else:
+		sprite.play("idle")
+	
+	if velocity.y > 0:
+		sprite.play("fall")
 	
 	move_and_slide()
 
@@ -72,12 +84,15 @@ func jump(speed):
 		jump_timer.start()
 		coyote_time = 0
 		self.velocity.y = JUMP_VELOCITY * speed
+		if not dash_check:
+			sprite.play("jump")
 
 func dash(direction):
 	print("dashed")
+	sprite.play("dash")
 	velocity.x = direction * SPEED * 2
-	jump(0.5)
 	dash_check = true
+	jump(0.5)
 	dash_timer.start()
 		
 func smash():
@@ -85,6 +100,7 @@ func smash():
 	velocity.y = -JUMP_VELOCITY * 2
 	smash_check = true
 	jump_check = false
+	sprite.play("smash")
 	smash_timer.start()
 	
 func jump_boost(length):
@@ -100,6 +116,7 @@ func apply_wind(force):
 
 func _on_dash_timer_timeout() -> void:
 	dash_check = false
+	sprite.play("run")
 
 
 func _on_jump_timer_timeout() -> void:
