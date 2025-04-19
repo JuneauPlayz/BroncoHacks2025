@@ -8,3 +8,4 @@ func _on_body_entered(body: Node2D) -> void:
 		self.queue_free()
 		var game = get_tree().get_first_node_in_group("game")
 		game.hasKey = true
+		game.has_key_visual.visible = true

@@ -6,11 +6,15 @@ var current_scene
 var current_level
 var h_state
 var v_state
+var dash_state
 
 var hasKey = false
 
+@onready var has_key_visual: Area2D = $CanvasLayer/HasKey
+
 @onready var h_state_label: Label = $CanvasLayer/H_STATE_LABEL
 @onready var v_state_label: Label = $CanvasLayer/V_STATE_LABEL
+@onready var dash_state_label: Label = $CanvasLayer/DASH_STATE_LABEL
 
 @onready var score_label: Label = $CanvasLayer/Score
 
@@ -23,14 +27,19 @@ const LEVEL_3 = preload("res://levels/level3.tscn")
 const LEVEL_4 = preload("res://levels/level4.tscn")
 const LEVEL_5 = preload("res://levels/level5.tscn")
 const WIN_SCREEN = preload("res://win_screen.tscn")
+const START_SCREEN = preload("res://start_screen.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	new_scene(LEVEL_1)
+	new_scene(START_SCREEN)
 
 func _process(delta : float) -> void:
-	h_state_label.text = h_state
-	v_state_label.text = v_state
+	if h_state != null:
+		h_state_label.text = h_state
+	if v_state != null:
+		v_state_label.text = v_state
+	if dash_state != null:
+		dash_state_label.text = dash_state
 
 func new_scene(scene):
 	if current_scene != null:
@@ -48,7 +57,10 @@ func add_score(amt):
 	
 func finish_level():
 	hasKey = false
+	has_key_visual.visible = false
 	match current_level:
+		START_SCREEN:
+			new_scene(LEVEL_1)
 		LEVEL_1:
 			new_scene(LEVEL_2)
 		LEVEL_2:

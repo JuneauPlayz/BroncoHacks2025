@@ -17,6 +17,8 @@ var jump_check = false
 var smash_check = false
 
 var can_dash = true
+var can_jump = true
+
 var direction 
 
 var previous_h_state = null
@@ -26,6 +28,8 @@ var previous_v_state = null
 @onready var jump_timer: Timer = $JumpTimer
 @onready var smash_timer: Timer = $SmashTimer
 @onready var jump_boost_timer: Timer = $JumpBoostTimer
+@onready var dash_cooldown: Timer = $DashCooldown
+@onready var jump_cooldown: Timer = $JumpCooldown
 
 
 var powerup_timer
@@ -77,9 +81,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if game.h_state == "dash" and is_on_floor() and can_dash:
+	if game.h_state == "dash" and is_on_floor() and can_dash and not jump_check:
 		dash(direction)
-	if previous_v_state == "jump" and game.v_state == "crouch" and jump_check:
+	if jump_check and game.v_state == "crouch" and jump_check:
 		smash()
 
 	velocity += external_wind * delta
@@ -104,6 +108,9 @@ func jump(speed):
 		self.velocity.y = JUMP_VELOCITY * speed
 		if not dash_check:
 			sprite.play("jump")
+		can_jump = false
+		jump_cooldown.start()
+		
 
 func dash(direction):
 	hitbox_reset()
@@ -117,6 +124,7 @@ func dash(direction):
 	for wall in get_tree().get_nodes_in_group("walls"):
 		wall.check_for_dash_hit(self)
 	can_dash = false
+	dash_cooldown.start()
 		
 func smash():
 	hitbox_reset()
@@ -162,6 +170,8 @@ func _on_jump_boost_timer_timeout() -> void:
 	
 func die():
 	game.new_scene(game.current_level)
+	game.hasKey = false
+	game.has_key_visual.visible = false
 	
 func hitbox_reset():
 	hitbox.monitorable = false
@@ -170,3 +180,7 @@ func hitbox_reset():
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
+
+
+func _on_jump_cooldown_timeout() -> void:
+	can_jump = true
