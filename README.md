@@ -5,7 +5,7 @@
 
 ## 📽️ Video Demo
 
-🎥 [Watch the Demo](https://www.youtube.com/watch?v=your-demo-link)
+🎥 [Watch the Demo](https://youtube.com/shorts/jl2Hb8mHhLY?si=3cNOFq8mfPhKNIrS)
 
 
 
@@ -16,11 +16,6 @@
 - [Evan Chavez](https://github.com/z8345) – 
 - [Corey Ashabranner](https://github.com/cashabranner) – 
 
-## 🖼️ Screenshots
+\
 
-![Screenshot 1](link-to-screenshot1)
-*Caption for screenshot 1*
-
-![Screenshot 2](link-to-screenshot2)
-*Caption for screenshot 2*
 
