@@ -30,3 +30,7 @@ func _process(delta: float) -> void:
 func _on_wall_detection_body_entered(body: Node2D) -> void:
 	if body.dash_check == true:
 		wall.queue_free()
+
+
+func _on_smash_timer_timeout() -> void:
+	pass # Replace with function body.

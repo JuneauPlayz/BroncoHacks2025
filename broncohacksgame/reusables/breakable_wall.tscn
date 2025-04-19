@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://dssiqlwrlrgmr"]
+
+[sub_resource type="GDScript" id="GDScript_njcad"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_wall_detection_body_entered(body: Node2D) -> void:
+	if body.dash_check == true or body.smash_check == true:
+		queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wmby6"]
+size = Vector2(20, 151)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agq2u"]
+size = Vector2(1746.65, 67.5392)
+
+[node name="Wall" type="Node2D"]
+script = SubResource("GDScript_njcad")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(3, -135)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 65.5)
+shape = SubResource("RectangleShape2D_wmby6")
+
+[node name="WallDetection" type="Area2D" parent="."]
+position = Vector2(3, -68)
+scale = Vector2(0.0160307, -2.30977)
+collision_layer = 2
+collision_mask = 2
+
+[node name="ColorRect" type="ColorRect" parent="WallDetection"]
+offset_left = -686.183
+offset_top = -32.0379
+offset_right = 473.817
+offset_bottom = 33.9621
+color = Color(0.508134, 0.081617, 0.182632, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WallDetection"]
+position = Vector2(-124.754, 2.1647)
+shape = SubResource("RectangleShape2D_agq2u")
+
+[connection signal="body_entered" from="WallDetection" to="." method="_on_wall_detection_body_entered"]
