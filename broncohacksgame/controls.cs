@@ -5,11 +5,10 @@ using System.IO.Ports;
 public partial class Teensy1 : Node2D
 {
 	SerialPort serialPort;
-	RichTextLabel text;
-	Node game;
+	Node2D game;
 	public override void _Ready()
 	{
-		game = GetNode<Node>(".");
+		game = GetParent<Node2D>();
 		
 		try
 		{
@@ -17,11 +16,9 @@ public partial class Teensy1 : Node2D
 			serialPort.ReadTimeout = 50;
 
 			serialPort.Open();
-			text.Text = "Serial Ready";
 		}
 		catch (Exception e)
 		{
-			text.Text = "Serial Error: " + e.Message;
 			GD.PrintErr("Serial open error: " + e.Message);
 		}
 	}
@@ -38,16 +35,15 @@ while (serialPort.BytesToRead > 0)
 
 			if (states.Length >= 2)
 			{
-				string horizontalState = states[0];
-				string verticalState = states[1];
+				game.Set("h_state", states[0]);
+				game.Set("v_state", states[1]);
 	
-				game.h_state = horizontalState;
-				game.v_state = verticalState;
+				
 			}
 			else
 			{
-				game.h_state = null;
-				game.v_state = null;
+				game.Set("h_state", "");
+				game.Set("v_state", "");
 			}
 		}
 		catch (TimeoutException)
