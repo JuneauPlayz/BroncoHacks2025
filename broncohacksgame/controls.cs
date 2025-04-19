@@ -35,13 +35,15 @@ while (serialPort.BytesToRead > 0)
 
 			if (states.Length >= 2)
 			{
-				game.Set("h_state", states[0]);
-				game.Set("v_state", states[1]);
+				game.Set("dash_state", states[0]);
+				game.Set("h_state", states[1]);
+				game.Set("v_state", states[2]);
 	
 				
 			}
 			else
 			{
+				game.Set("dash_state", "");
 				game.Set("h_state", "");
 				game.Set("v_state", "");
 			}

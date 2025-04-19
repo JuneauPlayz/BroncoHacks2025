@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://vauvmsu8yxvv"]
+[gd_scene load_steps=6 format=3 uid="uid://vauvmsu8yxvv"]
 
 [ext_resource type="Script" uid="uid://bqqdd5la4y6n2" path="res://game.gd" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://b1o2ccmghaxb5" path="res://controls.cs" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://ctm6idwgbc3j1" path="res://key.tscn" id="4_7jktm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_80nbo"]
 font_size = 36
@@ -26,17 +27,29 @@ text = "Score: 0"
 label_settings = SubResource("LabelSettings_80nbo")
 
 [node name="H_STATE_LABEL" type="Label" parent="CanvasLayer"]
-offset_left = 206.0
-offset_top = 3.0
-offset_right = 364.0
-offset_bottom = 60.0
+offset_left = 274.0
+offset_top = 5.0
+offset_right = 432.0
+offset_bottom = 62.0
 text = "forward"
 label_settings = SubResource("LabelSettings_e2o6t")
 
 [node name="V_STATE_LABEL" type="Label" parent="CanvasLayer"]
-offset_left = 401.0
+offset_left = 509.0
 offset_top = 4.0
-offset_right = 503.0
+offset_right = 611.0
 offset_bottom = 61.0
 text = "jump"
 label_settings = SubResource("LabelSettings_e2o6t")
+
+[node name="DASH_STATE_LABEL" type="Label" parent="CanvasLayer"]
+offset_left = 705.0
+offset_top = 4.0
+offset_right = 807.0
+offset_bottom = 61.0
+text = "none"
+label_settings = SubResource("LabelSettings_e2o6t")
+
+[node name="HasKey" parent="CanvasLayer" instance=ExtResource("4_7jktm")]
+visible = false
+position = Vector2(1117, 22)
