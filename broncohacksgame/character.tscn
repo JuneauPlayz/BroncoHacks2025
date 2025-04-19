@@ -187,10 +187,12 @@ position = Vector2(1, -41)
 shape = SubResource("CapsuleShape2D_yxww1")
 
 [node name="DashCooldown" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 2.0
+one_shot = true
 
 [node name="JumpCooldown" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 2.0
+one_shot = true
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]

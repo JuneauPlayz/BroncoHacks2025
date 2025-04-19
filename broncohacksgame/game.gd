@@ -10,6 +10,12 @@ var dash_state
 
 var hasKey = false
 
+var jump = 0
+var jump_squat = 0
+var dash = 0
+
+@onready var stats_label: Label = $CanvasLayer/Stats
+
 @onready var has_key_visual: Area2D = $CanvasLayer/HasKey
 
 @onready var h_state_label: Label = $CanvasLayer/H_STATE_LABEL
@@ -54,8 +60,22 @@ func new_scene(scene):
 func add_score(amt):
 	print(h_state)
 	print(v_state)
-	score += amt
-	score_label.text = "Score: " + str(score)
+
+
+func add_jump(amt):
+	jump += amt
+	update_stats()
+	
+func add_jump_squat(amt):
+	jump_squat += amt
+	update_stats()
+	
+func add_dash(amt):
+	dash += amt
+	update_stats()
+
+func update_stats():
+	stats_label.text = "Jump Count: " + str(jump) + "\nSquat: " + str(jump_squat) + "\nDash Count: " + str(dash)
 	
 func finish_level():
 	hasKey = false
@@ -68,10 +88,10 @@ func finish_level():
 		LEVEL_2:
 			new_scene(LEVEL_3)
 		LEVEL_3:
-			new_scene(LEVEL_4)
-		LEVEL_4:
 			new_scene(LEVEL_5)
 		LEVEL_5:
+			new_scene(LEVEL_4)
+		LEVEL_4:
 			new_scene(WIN_SCREEN)
 			
 			

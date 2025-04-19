@@ -18,35 +18,37 @@ script = ExtResource("2_e2o6t")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Score" type="Label" parent="CanvasLayer"]
+[node name="Stats" type="Label" parent="CanvasLayer"]
 offset_left = 23.0
 offset_top = 8.0
 offset_right = 159.0
 offset_bottom = 58.0
-text = "Score: 0"
+text = "Jump Count:
+Squat Count:
+Dash Count: "
 label_settings = SubResource("LabelSettings_80nbo")
 
 [node name="H_STATE_LABEL" type="Label" parent="CanvasLayer"]
-offset_left = 274.0
-offset_top = 5.0
-offset_right = 432.0
-offset_bottom = 62.0
+offset_left = 487.0
+offset_top = 12.0
+offset_right = 645.0
+offset_bottom = 69.0
 text = "forward"
 label_settings = SubResource("LabelSettings_e2o6t")
 
 [node name="V_STATE_LABEL" type="Label" parent="CanvasLayer"]
-offset_left = 509.0
-offset_top = 4.0
-offset_right = 611.0
-offset_bottom = 61.0
+offset_left = 722.0
+offset_top = 11.0
+offset_right = 824.0
+offset_bottom = 68.0
 text = "jump"
 label_settings = SubResource("LabelSettings_e2o6t")
 
 [node name="DASH_STATE_LABEL" type="Label" parent="CanvasLayer"]
-offset_left = 705.0
-offset_top = 4.0
-offset_right = 807.0
-offset_bottom = 61.0
+offset_left = 918.0
+offset_top = 11.0
+offset_right = 1020.0
+offset_bottom = 68.0
 text = "none"
 label_settings = SubResource("LabelSettings_e2o6t")
 

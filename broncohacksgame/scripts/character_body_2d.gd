@@ -24,6 +24,8 @@ var direction
 var previous_h_state = null
 var previous_v_state = null
 
+var current_direction = null
+
 @onready var dash_timer: Timer = $DashTimer
 @onready var jump_timer: Timer = $JumpTimer
 @onready var smash_timer: Timer = $SmashTimer
@@ -58,15 +60,17 @@ func _physics_process(delta: float) -> void:
 		coyote_time -= delta
 		
 	# Handle jump.
-	if game.v_state == "jump" and coyote_time > 0:
+	if game.v_state == "jump" and coyote_time > 0 and can_jump:
 		jump(1)
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	if game.h_state == "forward" or Input.is_action_just_pressed("right"):
 		direction = 1.0
+		current_direction = 1.0
 	elif game.h_state == "backward" or Input.is_action_just_pressed("left"):
 		direction = -1.0
+		current_direction = -1.0
 	elif game.h_state == "neutral":
 		direction = 0.0
 	if not dash_check:
@@ -81,9 +85,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if game.h_state == "dash" and is_on_floor() and can_dash and not jump_check:
-		dash(direction)
-	if jump_check and game.v_state == "crouch" and jump_check:
+	if game.dash_state == "dash" and is_on_floor() and can_dash and not jump_check:
+		dash(current_direction)
+	if game.v_state == "crouch":
 		smash()
 
 	velocity += external_wind * delta
@@ -102,6 +106,7 @@ func _physics_process(delta: float) -> void:
 func jump(speed):
 	if is_on_floor():
 		print("jumping")
+		game.add_jump(1)
 		jump_check = true
 		jump_timer.start()
 		coyote_time = 0
@@ -116,6 +121,7 @@ func dash(direction):
 	hitbox_reset()
 	print("dashed")
 	sprite.play("dash")
+	game.add_dash(1)
 	direction = 1.0
 	velocity.x = direction * SPEED * 2
 	dash_check = true
@@ -127,6 +133,7 @@ func dash(direction):
 	dash_cooldown.start()
 		
 func smash():
+	game.add_jump_squat(1)
 	hitbox_reset()
 	print("smashed")
 	velocity.y = -JUMP_VELOCITY * 2
