@@ -29,8 +29,10 @@ func _ready() -> void:
 	new_scene(LEVEL_1)
 
 func _process(delta : float) -> void:
-	h_state_label.text = h_state
-	v_state_label.text = v_state
+	if h_state != null:
+		h_state_label.text = h_state
+	if v_state != null:
+		v_state_label.text = v_state
 
 func new_scene(scene):
 	if current_scene != null:
