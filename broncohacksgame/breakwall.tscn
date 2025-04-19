@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmtqj0ih6y5cq"]
+
+[ext_resource type="Texture2D" uid="uid://bkcju72c3cvbl" path="res://sprites/breakwall.png" id="1_amqgk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_amqgk"]
+size = Vector2(16, 48)
+
+[node name="breakwall" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_amqgk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_amqgk")
