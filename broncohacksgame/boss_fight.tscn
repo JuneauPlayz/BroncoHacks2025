@@ -1,0 +1,83 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5lsheor81w3s"]
+
+[ext_resource type="PackedScene" uid="uid://cq7j4tnoam0w7" path="res://reusables/platform.tscn" id="1_bhtn8"]
+[ext_resource type="PackedScene" uid="uid://brhvmfgql0eyo" path="res://windy_area.tscn" id="1_n65jo"]
+[ext_resource type="Script" uid="uid://de26ixs7ahbg2" path="res://boss_fight.gd" id="1_nq0y5"]
+[ext_resource type="PackedScene" uid="uid://dexidgfh0kg4h" path="res://character.tscn" id="2_n65jo"]
+[ext_resource type="PackedScene" uid="uid://fy0y6fqns3q3" path="res://reusables/death_area.tscn" id="5_47mo0"]
+[ext_resource type="PackedScene" uid="uid://vycxrjoysryi" path="res://reusables/warning_area.tscn" id="6_y2k5v"]
+
+[node name="boss_fight" type="Node2D"]
+script = ExtResource("1_nq0y5")
+
+[node name="SideWinds" type="Node2D" parent="."]
+
+[node name="WindyArea" parent="SideWinds" instance=ExtResource("1_n65jo")]
+position = Vector2(12, -1)
+scale = Vector2(1.92013, 4.89836)
+wind_direction = Vector2(1, 0)
+strength = 6000.0
+
+[node name="WindyArea2" parent="SideWinds" instance=ExtResource("1_n65jo")]
+position = Vector2(510, 6)
+scale = Vector2(1.92013, 4.89836)
+strength = 6000.0
+
+[node name="Platform" parent="." instance=ExtResource("1_bhtn8")]
+position = Vector2(148, 460)
+scale = Vector2(1.06502, -0.666667)
+
+[node name="Platform2" parent="." instance=ExtResource("1_bhtn8")]
+position = Vector2(617, 461)
+scale = Vector2(1.06502, -0.666667)
+
+[node name="Platform3" parent="." instance=ExtResource("1_bhtn8")]
+position = Vector2(388, 343)
+scale = Vector2(1.06502, -0.666667)
+
+[node name="Platform4" parent="." instance=ExtResource("1_bhtn8")]
+position = Vector2(141, 205)
+scale = Vector2(1.06502, -0.666667)
+
+[node name="Platform5" parent="." instance=ExtResource("1_bhtn8")]
+position = Vector2(625, 205)
+scale = Vector2(1.06502, -0.666667)
+
+[node name="Character" parent="." instance=ExtResource("2_n65jo")]
+position = Vector2(102, 184)
+
+[node name="BottomHalf" type="Node2D" parent="."]
+
+[node name="BottomHalfArea" parent="BottomHalf" instance=ExtResource("5_47mo0")]
+position = Vector2(2, 216)
+scale = Vector2(7.23632, 3.14911)
+monitoring = false
+
+[node name="WarningArea" parent="BottomHalf" instance=ExtResource("6_y2k5v")]
+position = Vector2(3, 237)
+scale = Vector2(2.28139, 1.88)
+
+[node name="TopHalf" type="Node2D" parent="."]
+position = Vector2(2, -221)
+
+[node name="TopHalfArea" parent="TopHalf" instance=ExtResource("5_47mo0")]
+position = Vector2(-1, 107)
+scale = Vector2(7.23632, 3.14911)
+monitoring = false
+
+[node name="WarningArea2" parent="TopHalf" instance=ExtResource("6_y2k5v")]
+position = Vector2(1, 131)
+scale = Vector2(2.28139, 1.88)
+
+[node name="Middle" type="Node2D" parent="."]
+position = Vector2(273, -303)
+scale = Vector2(0.300742, 1.73411)
+
+[node name="Middle" parent="Middle" instance=ExtResource("5_47mo0")]
+position = Vector2(-1, 107)
+scale = Vector2(7.23632, 3.14911)
+monitoring = false
+
+[node name="WarningArea2" parent="Middle" instance=ExtResource("6_y2k5v")]
+position = Vector2(1, 131)
+scale = Vector2(2.28139, 1.88)

@@ -2,7 +2,8 @@ extends CharacterBody2D
 
 
 var SPEED = 300.0
-var JUMP_VELOCITY = -400.0
+var JUMP_VELOCITY = -520.0
+var external_wind = Vector2.ZERO
 
 var dash_check = false
 var jump_check = false
@@ -46,6 +47,10 @@ func _physics_process(delta: float) -> void:
 		dash(direction)
 	if Input.is_action_just_pressed("smash") and jump_check:
 		smash()
+
+	velocity += external_wind * delta
+
+	
 	move_and_slide()
 
 func jump(speed):
@@ -77,7 +82,8 @@ func jump_boost(length):
 	powerup_timer.visible = true
 	jump_boost_timer.start()
 
-
+func apply_wind(force):
+	external_wind = force
 
 func _on_dash_timer_timeout() -> void:
 	dash_check = false
@@ -97,3 +103,6 @@ func _on_jump_boost_timer_timeout() -> void:
 	JUMP_VELOCITY /= 2
 	has_powerup = false
 	powerup_timer.visible = false
+	
+func die():
+	visible = false
