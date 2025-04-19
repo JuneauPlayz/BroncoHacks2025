@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://vycxrjoysryi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_admxr"]
+font_size = 61
+font_color = Color(1, 1, 1, 0.407843)
+
+[node name="WarningArea" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 350.0
+offset_bottom = 223.0
+scale = Vector2(1.00426, 1)
+color = Color(0.811765, 0.705882, 0.4, 0.470588)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 41.0
+offset_right = 281.0
+offset_bottom = 125.0
+text = "!  !  !  !  !"
+label_settings = SubResource("LabelSettings_admxr")

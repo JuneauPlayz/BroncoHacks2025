@@ -2,7 +2,12 @@ extends CharacterBody2D
 
 
 var SPEED = 300.0
-var JUMP_VELOCITY = -400.0
+var JUMP_VELOCITY = -520.0
+var external_wind = Vector2.ZERO
+
+@export var coyote_time_max := 0.2
+var coyote_time := 0.0
+
 
 var dash_check = false
 var jump_check = false
@@ -28,9 +33,14 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	
+	if is_on_floor():
+		coyote_time = coyote_time_max
+	else:
+		coyote_time -= delta
+		
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
+	if Input.is_action_just_pressed("jump") and coyote_time > 0:
 		jump(1)
 	
 	# Get the input direction and handle the movement/deceleration.
@@ -46,6 +56,10 @@ func _physics_process(delta: float) -> void:
 		dash(direction)
 	if Input.is_action_just_pressed("smash") and jump_check:
 		smash()
+
+	velocity += external_wind * delta
+
+	
 	move_and_slide()
 
 func jump(speed):
@@ -53,6 +67,7 @@ func jump(speed):
 		print("jumping")
 		jump_check = true
 		jump_timer.start()
+		coyote_time = 0
 		self.velocity.y = JUMP_VELOCITY * speed
 
 func dash(direction):
@@ -77,7 +92,8 @@ func jump_boost(length):
 	powerup_timer.visible = true
 	jump_boost_timer.start()
 
-
+func apply_wind(force):
+	external_wind = force
 
 func _on_dash_timer_timeout() -> void:
 	dash_check = false
@@ -97,3 +113,6 @@ func _on_jump_boost_timer_timeout() -> void:
 	JUMP_VELOCITY /= 2
 	has_powerup = false
 	powerup_timer.visible = false
+	
+func die():
+	visible = false
