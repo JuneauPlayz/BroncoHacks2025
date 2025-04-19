@@ -3,8 +3,8 @@ extends CharacterBody2D
 var game
 @onready var sprite: AnimatedSprite2D = $Sprite
 
-var SPEED = 300.0
-var JUMP_VELOCITY = -520.0
+var SPEED = 200.0
+var JUMP_VELOCITY = -350.0
 var external_wind = Vector2.ZERO
 
 @export var coyote_time_max := 0.2
@@ -66,11 +66,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("smash") and jump_check:
 		smash()
 
-	velocity += external_wind * delta
-	if velocity != Vector2.ZERO:
-		game.add_score(1)
-	else:
-		sprite.play("idle")
+	##velocity += external_wind * delta
+	##if velocity != Vector2.ZERO:
+		##game.add_score(1)
+	##else:
+	##	sprite.play("idle")
 	
 	if velocity.y > 0:
 		sprite.play("fall")
