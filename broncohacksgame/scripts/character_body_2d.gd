@@ -16,6 +16,11 @@ var dash_check = false
 var jump_check = false
 var smash_check = false
 
+var direction 
+
+var previous_h_state = null
+var previous_v_state = null
+
 @onready var dash_timer: Timer = $DashTimer
 @onready var jump_timer: Timer = $JumpTimer
 @onready var smash_timer: Timer = $SmashTimer
@@ -46,12 +51,15 @@ func _physics_process(delta: float) -> void:
 		coyote_time -= delta
 		
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and coyote_time > 0:
+	if game.v_state == "jump" and coyote_time > 0:
 		jump(1)
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("left", "right")
+	if game.h_state == "forward":
+		direction = 1.0
+	elif game.h_state == "backward":
+		direction = -1.0
 	if not dash_check:
 		if direction:
 			if not jump_check:
@@ -64,9 +72,9 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	if Input.is_action_just_pressed("dash") and is_on_floor():
+	if game.h_state == "dash" and is_on_floor():
 		dash(direction)
-	if Input.is_action_just_pressed("smash") and jump_check:
+	if previous_v_state == "jump" and game.v_state == "crouch" and jump_check:
 		smash()
 
 	velocity += external_wind * delta
@@ -78,6 +86,8 @@ func _physics_process(delta: float) -> void:
 	if velocity.y > 0:
 		sprite.play("fall")
 	
+	previous_h_state = game.h_state
+	previous_v_state = game.v_state
 	move_and_slide()
 
 func jump(speed):
